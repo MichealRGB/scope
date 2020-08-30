@@ -10,14 +10,14 @@ import commonTheme from 'weaveworks-ui-components/lib/theme';
 
 import GlobalStyle from './global-style';
 // import Logo from './logo';
-import Footer from './footer';
-import Sidebar from './sidebar';
+// import Footer from './footer';
+// import Sidebar from './sidebar';
 import HelpPanel from './help-panel';
 import TroubleshootingMenu from './troubleshooting-menu';
 // import Search from './search';
-import Status from './status';
+// import Status from './status';
 // import Topologies from './topologies';
-import TopologyOptions from './topology-options';
+// import TopologyOptions from './topology-options';
 import Overlay from './overlay';
 import {
   pinNextMetric,
@@ -43,7 +43,7 @@ import Nodes from './nodes';
 // import TimeControl from './time-control';
 import TimeTravelWrapper from './time-travel-wrapper';
 // import ViewModeSelector from './view-mode-selector';
-import NetworkSelector from './networks-selector';
+// import NetworkSelector from './networks-selector';
 import DebugToolbar, { showingDebugToolbar, toggleDebugToolbar } from './debug-toolbar';
 import { getUrlState } from '../utils/router-utils';
 import { getRouter } from '../router';
@@ -196,8 +196,8 @@ class App extends React.Component {
 
   render() {
     const {
-      isTableViewMode, isGraphViewMode, isResourceViewMode, showingDetails,
-      showingHelp, showingNetworkSelector, showingTroubleshootingMenu,
+      showingDetails,
+      showingHelp, showingTroubleshootingMenu,
       timeTravelTransitioning, timeTravelSupported, contrastMode,
     } = this.props;
 
@@ -229,14 +229,6 @@ class App extends React.Component {
             </div>
 
             <Nodes />
-
-            <Sidebar classNames={isTableViewMode ? 'sidebar-gridmode' : ''}>
-              {showingNetworkSelector && isGraphViewMode && <NetworkSelector />}
-              {!isResourceViewMode && <Status />}
-              {!isResourceViewMode && <TopologyOptions />}
-            </Sidebar>
-
-            <Footer />
 
             <Overlay faded={timeTravelTransitioning} />
           </div>
