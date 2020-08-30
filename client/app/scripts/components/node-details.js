@@ -33,12 +33,12 @@ function getTruncationText(count) {
 class NodeDetails extends React.Component {
   handleClickClose = (ev) => {
     ev.preventDefault();
-    this.props.clickCloseDetails(this.props.nodeId);
+    this.props.clickCloseDetails(this.props.nodeId).pop(0);
   }
 
   handleShowTopologyForNode = (ev) => {
     ev.preventDefault();
-    this.props.clickShowTopologyForNode(this.props.topologyId, this.props.nodeId);
+    this.props.clickShowTopologyForNode(this.props.topologyId, this.props.nodeId).pop(0);
   }
 
   componentDidMount() {

@@ -6,14 +6,14 @@ import classNames from 'classnames';
 import { debounce } from 'lodash';
 import { Terminal as Term } from 'xterm';
 import * as fit from 'xterm/lib/addons/fit/fit';
-import stableStringify from 'json-stable-stringify';
+// import stableStringify from 'json-stable-stringify';
 
 import { closeTerminal } from '../actions/app-actions';
 import { getPipeStatus } from '../actions/request-actions';
 import { getNeutralColor } from '../utils/color-utils';
 import { setDocumentTitle } from '../utils/title-utils';
 import {
-  deletePipe, doResizeTty, getWebsocketUrl, basePath
+  deletePipe, doResizeTty, getWebsocketUrl
 } from '../utils/web-api-utils';
 
 const log = debug('scope:terminal');
@@ -34,27 +34,6 @@ function ab2str(buf) {
   const decodedString = decodeURIComponent(escape(encodedString));
   return decodedString;
 }
-
-function openNewWindow(url, bcr, minWidth = 200) {
-  const screenLeft = window.screenX || window.screenLeft;
-  const screenTop = window.screenY || window.screenTop;
-  const popoutWindowToolbarHeight = 51;
-  // TODO replace this stuff w/ looking up bounding box.
-  const windowOptions = {
-    height: bcr.height - popoutWindowToolbarHeight,
-    left: screenLeft + bcr.left,
-    location: 'no',
-    top: screenTop + (window.outerHeight - window.innerHeight) + bcr.top,
-    width: Math.max(minWidth, bcr.width),
-  };
-
-  const windowOptionsString = Object.keys(windowOptions)
-    .map(k => `${k}=${windowOptions[k]}`)
-    .join(',');
-
-  window.open(url, '', windowOptionsString);
-}
-
 
 class Terminal extends React.Component {
   constructor(props, context) {
@@ -231,12 +210,11 @@ class Terminal extends React.Component {
 
   handlePopoutTerminal(ev) {
     ev.preventDefault();
-    const paramString = stableStringify(this.props);
+    // const paramString = stableStringify(this.props);
     this.props.dispatch(closeTerminal(this.getPipeId()));
     this.setState({detached: true});
 
-    const bcr = this.node.getBoundingClientRect();
-    openNewWindow(`${basePath(window.location.pathname)}/terminal.html#!/state/${paramString}`, bcr);
+    // const bcr = this.node.getBoundingClientRect();
   }
 
   handleResize() {
@@ -265,12 +243,6 @@ class Terminal extends React.Component {
     return (
       <div className="terminal-header" style={style}>
         <div className="terminal-header-tools">
-          <span
-            title="Open in new browser window"
-            className="terminal-header-tools-item"
-            onClick={this.handlePopoutTerminal}>
-          Pop out
-          </span>
           <i
             title="Close"
             className="terminal-header-tools-item-icon fa fa-times"
