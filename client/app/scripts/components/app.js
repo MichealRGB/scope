@@ -205,7 +205,6 @@ class App extends React.Component {
       'contrast-mode': contrastMode,
       'time-travel-open': timeTravelSupported,
     });
-    const isIframe = window !== window.top;
 
     return (
       <ThemeProvider theme={{...commonTheme, scope: contrastMode ? contrastTheme : defaultTheme }}>
@@ -227,22 +226,6 @@ class App extends React.Component {
 
             <div className="header">
               {timeTravelSupported && this.props.renderTimeTravel()}
-
-              // <div className="selectors">
-              //   <div className="logo">
-              //     {!isIframe
-              //       && (
-              //       <svg width="100%" height="100%" viewBox="0 0 1089 217">
-              //         <Logo />
-              //       </svg>
-              //       )
-              //     }
-              //   </div>
-              //   <Search />
-              //   <Topologies />
-              //   <ViewModeSelector />
-              //   <TimeControl />
-              </div>
             </div>
 
             <Nodes />
